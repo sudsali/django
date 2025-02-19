@@ -1,0 +1,51 @@
+{% extends 'resume/base.html' %}
+
+{% block title %}Resume{% endblock %}
+
+{% block content %}
+  <!-- Header Section -->
+  <header class = "resume_header">
+      <h1 style="color: white;">{{ header.name }}</h1>
+      <p>{{ header.location }}</p>
+      <p>{{ header.phone }} | {{ header.email }} | <a href="{{ header.linkedin }}" style="color: lightblue;">LinkedIn</a> | <a href="{{ header.github }}"  style="color: lightblue;">GitHub</a></p>
+  </header>
+
+  <!-- Education Section -->
+  <h2>Education</h2>
+  <ul>
+      {% for edu in education_list %}
+        <li><strong>{{ edu.institution }}</strong> ({{ edu.start_year }} - {{ edu.finish_year }})</li>
+        <li>{{ edu.degree }}</li>
+        <li>GPA: {{ edu.gpa }}</li>
+      {% endfor %}
+  </ul>
+
+  <!-- Technical Skills Section -->
+  <h2>Technical Skills</h2>
+  <ul>
+      {% for skill in skill_list %}
+          <li><strong>{{ skill.category }}:</strong> {{ skill.skills }}</li>
+      {% endfor %}
+  </ul>
+
+  <!-- Experience Section -->
+  <h2>Experience</h2>
+  {% for exp in experience_list %}
+      <div>
+          <h3>{{ exp.job_title }} at {{ exp.company }}</h3>
+          <p>{{ exp.location }} ({{ exp.start_date|date:"M Y" }} - {{ exp.end_date|date:"M Y" }})</p>
+          <p>{{ exp.description|linebreaks }}</p>
+      </div>
+  {% endfor %}
+
+  <!-- Projects Section -->
+  <h2>Project</h2>
+  {% for proj in project_list %}
+      <div>
+          <h3>{{ proj.name }}</h3>
+          <p><strong>Technologies:</strong> {{ proj.technologies_used }}</p>
+          <p>{{ proj.start_date|date:"M Y" }} - {{ proj.end_date|date:"M Y" }}</p>
+          <p>{{ proj.description|linebreaks }}</p>
+      </div>
+  {% endfor %}
+{% endblock %}
